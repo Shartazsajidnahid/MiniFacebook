@@ -1,11 +1,6 @@
-<p>post works!</p>
-
-<body>
-    <div class="container">
-        <div class="form-group">
-            <textarea class="form-control" rows="5" [(ngModel)]="newpost.content" [ngModelOptions]="{standalone: true}"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary" (click)="submitpost()">Create Post</button>
+<div class="container">
+    <div class="form-group">
+        <textarea class="form-control" placeholder="What's on your mind?" rows="5" [(ngModel)]="newpost.content" [ngModelOptions]="{standalone: true}"></textarea>
     </div>
-</body>
+    <button type="submit" class="btn btn-primary" (click)="submitpost()">Create Post</button>
+</div>
