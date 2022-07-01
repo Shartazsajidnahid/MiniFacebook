@@ -1,15 +1,15 @@
 <p>homepage works!</p>
 <app-post></app-post>
-<p>all the posts here </p>
 
+<button class="btn btn-info col-12" (click)="getPosts()"> Get all posts</button>
 
-<div class="container">
+<div class="container" *ngFor="let posts of postArr">
     <div class="row">
-        <div class=" card col-12" style="width: 300px; ">
+        <div class="card col-12" style="width: 300px; ">
             <div class="card-body ">
-                <h5 class="card-title ">Eiffel Tower</h5>
+                <h5 class="card-title ">{{posts.userid}}</h5>
                 <!-- <h6 class="card-subtitle mb-3 text-muted ">Champ de Mars, Paris, France</h6> -->
-                <p class="card-text ">Built in 1889 Eiffel Tower is one of the most iconic landmarks in the world.</p>
+                <p class="card-text ">{{posts.content}}</p>
             </div>
         </div>
     </div>

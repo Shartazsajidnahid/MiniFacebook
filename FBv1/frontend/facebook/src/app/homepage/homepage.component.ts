@@ -14,7 +14,10 @@ export class HomepageComponent implements OnInit {
 
   newpost = new Post();
 
+  postArr: Post[] = [];
+
   ngOnInit(): void {
+    this.getPosts();
   }
 
   // submitpost(){
@@ -22,6 +25,22 @@ export class HomepageComponent implements OnInit {
   //   this.newpost = new Post();
   //   // this.router.navigate(['books']);
   // }
+
+  getPosts(){
+    this.PostService.getPost().subscribe(
+      (res: any) => {
+         console.log('Got posts ' );
+        console.log(res);
+        this.postArr = res as Post[];
+      }, (err: any) => {
+        console.log('error');
+      }
+    );
+    // console.log(this.PostService.getPost());
+    
+
+    
+  }
 
   
 

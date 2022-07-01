@@ -25,10 +25,9 @@ export class PostService {
     // return this.http.get(this.baseurl);
   }
 
-  public getPost(newpost: Post) {
-    console.log("hey");
-    console.log(newpost);
-    return this.http.put(this.baseurl, newpost);
+  public getPost() {
+    console.log("getpost from service");
+    return this.http.get(this.baseurl);
   }
 
   public createPost(newpost: Post) {
