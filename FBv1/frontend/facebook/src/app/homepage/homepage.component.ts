@@ -23,17 +23,6 @@ export class HomepageComponent implements OnInit {
   //   // this.router.navigate(['books']);
   // }
 
-  submitpost() {
   
-     this.PostService.createPost(this.newpost).subscribe(
-         (res: any) => {
-           console.log('posted successfully');
-           console.log(res);
-           this.newpost = new Post();
-         }, (err: any) => {
-           console.log('error');
-         }
-       );
-     }
 
 }
