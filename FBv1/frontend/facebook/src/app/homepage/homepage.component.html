@@ -1,6 +1,6 @@
 <p>homepage works!</p>
 
-
+<!-- 
 <form>
     <div class="form-group">
         <div class="form-outline">
@@ -9,4 +9,14 @@
     </div>
 
     <button type="submit" class="btn btn-primary" (click)="submitpost()">Post</button>
-</form>
+</form> -->
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <textarea class="form-control" rows="5" [(ngModel)]="newpost.content" [ngModelOptions]="{standalone: true}"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="submitpost()">Create Post</button>
+    </div>
+</body>

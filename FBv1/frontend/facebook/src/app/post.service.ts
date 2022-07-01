@@ -31,8 +31,8 @@ export class PostService {
     return this.http.put(this.baseurl, newpost);
   }
 
-  public userregistration(newpost: Post) {
-    console.log("hey");
+  public createPost(newpost: Post) {
+    console.log("hey from createpost postservice");
     console.log(this.baseurl, newpost, this.http);
     return this.http.post(this.baseurl, newpost);
   }
