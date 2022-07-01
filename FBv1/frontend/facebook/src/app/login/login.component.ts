@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
          console.log('logged in successfully: ' );
         console.log(res);
         this.userservice.currentuser = res;
-        
+        this.router.navigate(['homepage']);
       }, (err: any) => {
         console.log('error');
       }

@@ -15,11 +15,11 @@ export class PostService {
   readonly baseurl = "http://localhost:3000/post/";
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   currentpost : Post = new Post();
 
   public checkdb(newpost: Post) {
-    console.log("hey");
+    console.log("hey from service");
     console.log(newpost);
     //return( this.http.put(this.baseurl, newpost));
     // return this.http.get(this.baseurl);
