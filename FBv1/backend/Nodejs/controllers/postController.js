@@ -48,7 +48,7 @@ router.put('/', (req, res) => {
 
 router.post('/', (req, res) => {
     var post = new Post({
-        userid: "karma9658",
+        userid: req.body.userid,
         content: req.body.content
     });
 
@@ -56,7 +56,6 @@ router.post('/', (req, res) => {
         if (!err) res.send(doc);
         else console.log('Error in post save: ' + JSON.stringify(err, undefined, 2));
     });
-
 });
 
 module.exports = router;

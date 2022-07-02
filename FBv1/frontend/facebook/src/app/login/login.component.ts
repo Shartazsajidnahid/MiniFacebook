@@ -28,12 +28,14 @@ export class LoginComponent implements OnInit {
     this.newuser.userid = angForm1.value.userid;
     this.newuser.password = angForm1.value.password;
     console.log("from login comp");
-    this.userservice.checkdb(this.newuser).subscribe(
+    this.userservice.userlogin(this.newuser).subscribe(
       (res: any) => {
-         console.log('logged in successfully: ' );
+        console.log('logged in successfully: ' );
         console.log(res);
-        this.userservice.currentuser = res;
+        // this.userservice.currentuser = res;
+        this.userservice.setToken(this.newuser.userid);
         this.router.navigate(['homepage']);
+        // alert(this.userservice.getToken());
       }, (err: any) => {
         alert('Wrong Credentials');
       }
