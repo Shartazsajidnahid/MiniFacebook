@@ -33,7 +33,7 @@ export class UserService {
   }
 
   public userregistration(newuser: User) {
-    console.log("hey");
+    console.log("hey reg");
     console.log(this.baseurl, newuser, this.http);
     return this.http.post(this.baseurl, newuser);
   }

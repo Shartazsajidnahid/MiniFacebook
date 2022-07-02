@@ -10,6 +10,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PostComponent } from './post/post.component';
+import { SignupComponent } from './signup/signup.component';
 // import { RegisterComponent } from './signup/signup.component';
 
 
@@ -18,8 +19,8 @@ import { PostComponent } from './post/post.component';
     AppComponent,
     LoginComponent,
     HomepageComponent,
-    PostComponent
-    // RegisterComponent
+    PostComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

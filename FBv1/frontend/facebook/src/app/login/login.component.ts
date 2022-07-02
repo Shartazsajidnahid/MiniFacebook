@@ -23,22 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  postdata(angForm1: { value: { userid:any; password: any; }; }) {
-      this.newuser.userid = angForm1.value.userid;
-      this.newuser.password = angForm1.value.password;
 
-      this.userservice.userlogin(this.newuser).subscribe(
-        (res: any) => {
-          // console.log('logged in successfully: ' + res);
-          console.log(res);
-          this.userservice.currentuser = res;
-          this.router.navigate(['home']);
-        }, (err: any) => {
-          console.log('error');
-        }
-      );
-      // this.router.navigate(['login']);
-  }
   postdata1(angForm1: { value: { userid:any; password: any; }; }) {
     this.newuser.userid = angForm1.value.userid;
     this.newuser.password = angForm1.value.password;
@@ -50,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.userservice.currentuser = res;
         this.router.navigate(['homepage']);
       }, (err: any) => {
-        console.log('error');
+        alert('Wrong Credentials');
       }
     );
     
