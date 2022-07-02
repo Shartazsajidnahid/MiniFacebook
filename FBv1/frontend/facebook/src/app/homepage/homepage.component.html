@@ -1,11 +1,18 @@
-<p>homepage works!</p>
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand">Facebook mini</a>
+    <form class="form-inline">
+        <p class="" style="margin-right: 1rem;">{{currentUserId}}</p>
+        <!-- <a class="" href="#" style="margin-right: 1rem;">{{currentUserId}}</a> -->
+        <button class="btn btn-danger" type="submit" (click)="logout()">Logout</button>
+    </form>
+</nav>
 <app-post></app-post>
 
-<button class="btn btn-info col-12" (click)="getPosts()"> Get all posts</button>
 
-<div class="container" *ngFor="let posts of postArr">
-    <div class="row">
-        <div class="card col-12" style="width: 300px; ">
+
+<div class="container margin-top-0" *ngFor="let posts of postArr ">
+    <div class="row ">
+        <div class="card col-12 " style="width: 300px; ">
             <div class="card-body ">
                 <h5 class="card-title ">{{posts.userid}}</h5>
                 <!-- <h6 class="card-subtitle mb-3 text-muted ">Champ de Mars, Paris, France</h6> -->
