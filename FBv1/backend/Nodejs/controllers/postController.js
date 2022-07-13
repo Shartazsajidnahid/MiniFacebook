@@ -2,7 +2,7 @@ const express = require('express');
 const { isValidObjectId } = require('../db');
 var router = express.Router();
 
-var { Post } = require('../models/Post');
+var { Post } = require('../models/post');
 
 router.get('/', (req, res) => {
     Post.find((err, doc) => {

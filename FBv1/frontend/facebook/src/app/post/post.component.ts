@@ -26,7 +26,7 @@ export class PostComponent implements OnInit {
         (res: any) => {
           console.log('posted successfully');
           console.log(res);
-          this.newpost = new Post();
+          this.newpost.content="";
         }, (err: any) => {
           console.log('error');
         }
