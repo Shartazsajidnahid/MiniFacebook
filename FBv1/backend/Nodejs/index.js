@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const { mongoose } = require('./db.js');
+const { minioClient } = require('./connectminio.js');
+
 var employeeController = require('./controllers/userController.js');
 var postController = require('./controllers/postController.js');
 var app = express();
