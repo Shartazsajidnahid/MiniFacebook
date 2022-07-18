@@ -45,6 +45,7 @@ router.put('/', (req, res) => {
     });
 });
 
+
 router.post('/', (req, res) => {
     var customer = new User({
         name: req.body.name,
