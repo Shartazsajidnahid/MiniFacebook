@@ -1,0 +1,21 @@
+<p>image-lightbox works!</p>
+<div class="image-row">
+    <div class="image-column" *ngFor="let image of imag; let i = index">
+        <img src="{{image.url}}"  class="hover-shadow cursor">
+    </div>
+</div>
+<div id="imgModal" class="slide-modal">
+    <span class="close cursor" >&times;</span>
+    <div class="slide-modal-content">
+        <div class="img-slides" *ngFor="let image of imag; let i = index">
+            <img src="{{image.url}}">
+        </div>
+        <a class="prev" >&#10094;</a>
+        <a class="next">&#10095;</a> -->
+        <div class="image-row">
+            <div class="image-column" *ngFor="let image of imag; let i = index">
+                <img class="images"  src="{{image.url}}">
+            </div>
+        </div>
+    </div>
+</div> 

@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PostComponent } from './post/post.component';
 import { SignupComponent } from './signup/signup.component';
+import { ImageLightboxComponent } from './image-lightbox/image-lightbox.component';
+import { StoryComponent } from './story/story.component';
 // import { RegisterComponent } from './signup/signup.component';
 
 
@@ -20,7 +22,9 @@ import { SignupComponent } from './signup/signup.component';
     LoginComponent,
     HomepageComponent,
     PostComponent,
-    SignupComponent
+    SignupComponent,
+    ImageLightboxComponent,
+    StoryComponent
   ],
   imports: [
     BrowserModule,

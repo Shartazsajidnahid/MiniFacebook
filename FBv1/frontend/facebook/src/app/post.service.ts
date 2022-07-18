@@ -1,6 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 import { Post } from './post';
+import { story } from './story';
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +20,22 @@ export class PostService {
   // ];
 
   readonly baseurl = "http://localhost:3000/post/";
+
+  endPoint = 'http://localhost:3000';
+  allStatus: any;
+
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+  }); 
+
+  storyHeader = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+  });
 
 
   constructor(private http: HttpClient) {}
@@ -34,6 +57,12 @@ export class PostService {
     console.log("hey from createpost postservice");
     console.log(this.baseurl, newpost, this.http);
     return this.http.post(this.baseurl, newpost);
+  }
+
+
+  postStory(story: any): Observable<any>{
+    console.log(story);
+    return this.http.post(this.endPoint + '/api/story', story, {headers : this.storyHeader});
   }
 
 
