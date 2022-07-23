@@ -59,36 +59,27 @@ router.post('/story', upload.single("files"),(req, res) => {
     } catch (err) {
         // res.status(400).send(err);
     }
-    // newStory.save((err, doc) => {
-    //     if (!err) res.send(doc);
-    //     else console.log('Error in post save: ' + JSON.stringify(err, undefined, 2));
-    // });
+    
   
 });
 
 
-// module.exports.CreateStory = (async (req, res) => {
-//     console.log("from story controller");
 
-//     const minioClient = minio();
-
-//     //PutObject(bucketName, objectName, stream, size, metaData[, callback])
-
-//     var uuidName = crypto.randomUUID();
-//     console.log(JSON.stringify(req.file))
-//     minioClient.fPutObject('minifb', uuidName, req.file.path, function (err, objInfo) {
-
-//         if (err) {
-//             return console.log(err)
-//         }
-//     });
-// });
 
 module.exports = router;
 
+router.get('/', (req, res) => {
+    story.find((err, doc) => {
+        if (!err)
+            res.send(doc);
+        else
+            console.log('Error in receiving customer: ' + JSON.stringify(err, undefined, 2));
+    });
+});
+
 exports.getStory = (async (req,res) =>{
     try{
-        const allStory = await story.find().sort({"time":-1}).limit(10);       // -1 means descending
+        const allStory =  story.find().sort({"time":-1}).limit(10);       // -1 means descending
         res.send(allStory);
     } catch(err){
         console.log("not found anything");

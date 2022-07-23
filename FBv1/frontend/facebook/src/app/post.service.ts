@@ -20,6 +20,7 @@ export class PostService {
   //   {phone: "017171", name: 'Debi', userid: "db1", email: "debi@gmai.com", password: "123"},
   // ];
   readonly storyurl = "http://localhost:3000/story/story";
+  readonly storyurl2 = "http://localhost:3000/story";
 
   readonly baseurl = "http://localhost:3000/post/";
 
@@ -68,8 +69,8 @@ export class PostService {
 
   getStories(){
     console.log("all the stories here");
-    console.log(this.http.get<story>(this.baseurl));
-    return this.http.get<story>(this.baseurl);
+    console.log(this.http.get(this.storyurl2));
+    return this.http.get(this.storyurl2);
   }
 
   checkpostStory(pos: Post){

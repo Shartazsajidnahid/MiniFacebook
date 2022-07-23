@@ -51,21 +51,39 @@ export class StoryComponent implements OnInit {
   ngOnInit() {
     this.currentUserId = this.userService.getToken();
     
-    this.postService.getStories();
+    this.getPosts();
   }
 
 
-//   fetchStory() {
-//  this.postService.getStories().subscribe((data) =>{
-//       this.allStory = data.body;
-//       this.fetchedStories = this.allStory;
-//       for(let i=0;i<this.fetchedStories.length;i++){
-//         this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
-//         console.log(this.fetchedStories[i].storyUUID);
-//       }
-//     });
+  // fetchStory() {
+  //     this.postService.getStories().subscribe((data) =>{
+  //     this.allStory = data.body;
+  //     this.fetchedStories = this.allStory;
+  //     for(let i=0;i<this.fetchedStories.length;i++){
+  //       this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
+  //       console.log(this.fetchedStories[i].storyUUID);
+  //     }
+  //   });
   
-//   }
+  // }
+
+  getPosts(){
+    this.postService.getStories().subscribe(
+      (res: any) => {
+        console.log('Got stories ' );
+        console.log(res.body);
+        this.allStory = res;
+        this.fetchedStories = this.allStory;
+        for(let i=0;i<this.fetchedStories.length;i++){
+          this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
+          console.log(this.fetchedStories[i].storyUUID);
+        }
+      
+      }, (err: any) => {
+        console.log('error');
+      }
+    );
+  }
 
 
   onFileSelected(event: any) {
@@ -109,20 +127,7 @@ export class StoryComponent implements OnInit {
     })
   }
 
-  fetchStory() {
-    console.log("from story comp");
-    this.postService.getStories().subscribe((data) =>{
-        
-        console.log(data);
-        //  this.allStory = data.body;
-        //  this.fetchedStories = this.allStory;
-        //  for(let i=0;i<this.fetchedStories.length;i++){
-        //    this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
-        //    console.log(this.fetchedStories[i].storyUUID);
-        //  }
-       });
-     
-     }
+
 
 
   pos = new Post();
