@@ -18,7 +18,11 @@
 .card{
     flex: 0 0 auto;
 }
-
+.pura-screen{
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
 .card, .card-img, .card-img-overlay{
     border: transparent;
     border-radius: 10px;
@@ -217,6 +221,7 @@ h2{
 /*Scrollbar custommize*/
 .stories{
     scrollbar-color: #D4AA70 #e4e4e4;
+    width: 100%;
 }
 
 .stories::-webkit-scrollbar {

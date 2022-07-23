@@ -74,6 +74,7 @@ export class StoryComponent implements OnInit {
         console.log(res.body);
         this.allStory = res;
         this.fetchedStories = this.allStory;
+        
         for(let i=0;i<this.fetchedStories.length;i++){
           this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
           console.log(this.fetchedStories[i].storyUUID);
@@ -104,6 +105,7 @@ export class StoryComponent implements OnInit {
       this.postService.postStory(formData).subscribe((res) => {
         if (res) {
           console.log('Story Done');
+          alert("Story added successfully");
         }
         else{ 
           console.log("story not done")
@@ -113,19 +115,7 @@ export class StoryComponent implements OnInit {
     }
   }
 
-  poststory(){
-    const formData = new FormData();
-    // formData.append('files', , this.file.name);
-    // formData.append('name', this.userName);
 
-    console.log(formData);
-    this.postService.postStory(formData).subscribe((res) => {
-      if (res) {
-        console.log('Story Done');
-      }
-        // this.fetchStory();
-    })
-  }
 
 
 
@@ -150,6 +140,15 @@ export class StoryComponent implements OnInit {
     this.userService.deleteToken();
     this.router.navigate(['/login']);
   }
+
+//   filterStories(){
+//     this.fetchedStories = this.fetchedStories.filter(
+//         book => book.userid  != this.currentUserId);
+    
+//     console.log("Filtered story array");
+//     console.log(this.fetchedStories);
+// }
+
 
 
 }

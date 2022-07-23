@@ -13,6 +13,8 @@ router.get('/', (req, res) => {
     });
 });
 
+
+
 // router.get('/:id', (req, res) => {
 //     if (!isValidObjectId(req.params.id))
 //         return res.status(400).send('No record with such id: ' + req.params.id);
@@ -39,5 +41,7 @@ router.post('/', (req, res) => {
         else console.log('Error in post save: ' + JSON.stringify(err, undefined, 2));
     });
 });
+
+
 
 module.exports = router;

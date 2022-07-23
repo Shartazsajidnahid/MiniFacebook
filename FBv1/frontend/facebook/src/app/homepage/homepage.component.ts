@@ -35,7 +35,8 @@ export class HomepageComponent implements OnInit {
       (res: any) => {
         console.log('Got posts ' );
         console.log(res);
-        this.postArr = res as Post[];this.filterPosts();
+        this.postArr = res as Post[];
+        this.filterPosts();
       }, (err: any) => {
         console.log('error');
       }
@@ -53,7 +54,6 @@ export class HomepageComponent implements OnInit {
   filterPosts(){
       this.postArr = this.postArr.filter(
           book => book.userid  != this.currentUserId);
-      
       console.log("Filtered array");
       console.log(this.postArr);
   }
