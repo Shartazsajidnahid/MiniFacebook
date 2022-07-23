@@ -15,13 +15,15 @@ import { story } from './story';
 
 export class PostService {
   
+  
   // users: User[] = [
   //   {phone: "017171", name: 'Debi', userid: "db1", email: "debi@gmai.com", password: "123"},
   // ];
+  readonly storyurl = "http://localhost:3000/story/story";
 
   readonly baseurl = "http://localhost:3000/post/";
 
-  endPoint = 'http://localhost:3000';
+  endPoint = 'http://localhost:3000'; 
   allStatus: any;
 
   headers = new HttpHeaders({
@@ -59,12 +61,19 @@ export class PostService {
     return this.http.post(this.baseurl, newpost);
   }
 
-
   postStory(story: any): Observable<any>{
     console.log(story);
-    return this.http.post(this.endPoint + '/api/story', story, {headers : this.storyHeader});
+    return this.http.post(this.storyurl, story); 
   }
 
+  getStories(){
+    console.log("all the stories here");
+    console.log(this.http.get<story>(this.baseurl));
+    return this.http.get<story>(this.baseurl);
+  }
 
-
+  checkpostStory(pos: Post){
+    return this.http.post(this.storyurl, pos); 
+  }
 }
+

@@ -1,22 +1,12 @@
 <p>story works!</p>
  <!-- Story show -->
+ <button (click)="check()"> hey</button>
  <div class="stories">
 
-    <div class="card bg-dark text-white mine">
-        <input type="file" id="storyUpload" accept="image/*"  #file>
-        <div class="card-img" alt="..."></div>
-        <button class="btn card-img" (click)="file.click()">
-            <h5 class="card-title" style="color:#828ea8;">Add Story</h5>
-        </button>
-
-    </div>
-    <!-- <div *ngFor="let story of fetchedStories">
-        <div class="card bg-dark text-white others">
-            <img src={{story.storyUUID}}  class="card-img" alt="...">
-            <div class="card-img-overlay grad">
-                <h6 class="card-title" style="margin-top:8.5rem;">{{story.name}}</h6>
-            </div>
-        </div>
-    </div> -->
-
-</div>
+ <div class="card bg-dark text-white mine">
+    <input type="file" id="storyUpload" accept="image/*" (change)="onFileSelected($event)" #file>
+    <div class="card-img" alt="..."></div>
+    <button class="btn card-img" (click)="file.click()">
+        <h5 class="card-title" style="color:#828ea8;">Add Story</h5> 
+    </button>
+</div> </div>

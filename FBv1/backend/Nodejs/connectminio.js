@@ -18,6 +18,8 @@ var metaData = {
     'example': 5678,
     'userid' : 'nahid'
 }
+
+
 // minioClient.fPutObject('story', 'ssmeta.jpg', '/home/nahid/Pictures/Screenshot from 2022-07-15 21-49-56.png', metaData, function(err, etag) {
 //     if (err) return console.log(err)
 //     console.log('File uploaded successfully.')

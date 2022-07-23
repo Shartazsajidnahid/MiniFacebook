@@ -28,6 +28,7 @@ router.get('/', (req, res) => {
 
 
 router.post('/', (req, res) => {
+    // console.log("post controller");
     var post = new Post({
         userid: req.body.userid,
         content: req.body.content

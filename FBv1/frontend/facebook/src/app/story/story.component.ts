@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { story } from '../story';
 import { PostService } from '../post.service';
+import { Post } from '../post';
 
 @Component({
   selector: 'app-story',
@@ -49,6 +50,8 @@ export class StoryComponent implements OnInit {
 
   ngOnInit() {
     this.currentUserId = this.userService.getToken();
+    
+    this.postService.getStories();
   }
 
 
@@ -64,6 +67,7 @@ export class StoryComponent implements OnInit {
   
 //   }
 
+
   onFileSelected(event: any) {
 
     this.file = event.target.files[0];
@@ -74,19 +78,67 @@ export class StoryComponent implements OnInit {
     if (this.file) {
 
       const formData = new FormData();
-      formData.append('files', this.file, this.file.name);
-      formData.append('name', this.userName);
-
+      formData.append('files', this.file);
+      formData.append('name', String(this.currentUserId));
+      console.log("formdata");
       console.log(formData);
 
-      // this.postService.postStory(formData).subscribe((res) => {
-      //   if (res) {
-      //     console.log('Story Done');
-      //   }
-      //     // this.fetchStory();
-      // })
+      this.postService.postStory(formData).subscribe((res) => {
+        if (res) {
+          console.log('Story Done');
+        }
+        else{ 
+          console.log("story not done")
+        }
+          // this.fetchStory();
+      })
     }
   }
+
+  poststory(){
+    const formData = new FormData();
+    // formData.append('files', , this.file.name);
+    // formData.append('name', this.userName);
+
+    console.log(formData);
+    this.postService.postStory(formData).subscribe((res) => {
+      if (res) {
+        console.log('Story Done');
+      }
+        // this.fetchStory();
+    })
+  }
+
+  fetchStory() {
+    console.log("from story comp");
+    this.postService.getStories().subscribe((data) =>{
+        
+        console.log(data);
+        //  this.allStory = data.body;
+        //  this.fetchedStories = this.allStory;
+        //  for(let i=0;i<this.fetchedStories.length;i++){
+        //    this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
+        //    console.log(this.fetchedStories[i].storyUUID);
+        //  }
+       });
+     
+     }
+
+
+  pos = new Post();
+
+
+  check(){
+
+    this.pos.content = "yo";
+    this.pos.userid = "nahid";
+
+    this.postService.checkpostStory(this.pos).subscribe((res) => {
+
+    // this.postService.checkpostStory(this.pos);
+  });
+
+}
 
 
   onLogout() {

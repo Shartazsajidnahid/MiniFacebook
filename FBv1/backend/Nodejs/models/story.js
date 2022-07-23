@@ -17,4 +17,4 @@ const storySchema = mongoose.Schema({
 
 });
 
- const story = module.exports = mongoose.model('story', storySchema);
+const story = module.exports = mongoose.model('story', storySchema);
