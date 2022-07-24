@@ -11,7 +11,7 @@
         </button>
     </div>
 
-
+    
     <div *ngFor="let story of fetchedStories">
         <div class="card bg-dark text-white others" *ngIf="story.name!=this.currentUserId">
             <img src={{story.storyUUID}} class="card-img" alt="...">
@@ -20,4 +20,6 @@
             </div>
         </div>
     </div>
+
+    
 </div>

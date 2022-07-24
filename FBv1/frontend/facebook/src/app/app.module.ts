@@ -11,7 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PostComponent } from './post/post.component';
 import { SignupComponent } from './signup/signup.component';
-import { ImageLightboxComponent } from './image-lightbox/image-lightbox.component';
+// import { ImageLightboxComponent } from './image-lightbox/image-lightbox.component';
 import { StoryComponent } from './story/story.component';
 // import { RegisterComponent } from './signup/signup.component';
 
@@ -23,7 +23,6 @@ import { StoryComponent } from './story/story.component';
     HomepageComponent,
     PostComponent,
     SignupComponent,
-    ImageLightboxComponent,
     StoryComponent
   ],
   imports: [

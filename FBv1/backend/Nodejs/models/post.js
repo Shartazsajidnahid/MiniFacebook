@@ -9,6 +9,11 @@ var Post = mongoose.model('Post', {
     content: {
         type: String,
         required: 'Content no can\'t be empty'
+    },
+    time:{
+        type: Date,
+        default: Date.now,
+        required: true
     }
 });
 

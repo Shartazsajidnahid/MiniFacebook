@@ -15,18 +15,16 @@ router.get('/', (req, res) => {
 
 
 
-// router.get('/:id', (req, res) => {
-//     if (!isValidObjectId(req.params.id))
-//         return res.status(400).send('No record with such id: ' + req.params.id);
-
-//     Post.findById(req.params.id, (err, doc) => {
-//         if (!err)
-//             res.send(doc);
-//         else
-//             console.log('Error in retriving customer by id:' + JSON.stringify(err, undefined, 2));
-//     });
+// router.get('/', (req, res) => {
+    
+//     try {
+//         // userID = authController.loggedInUser.name;
+//         const allStatus = await Post.find().sort({ "time": -1 });        // -1 means descending 
+//         res.send(allStatus);
+//     } catch (err) {
+//         res.status(400).send({ Fail: 'Statuses not found' });
+//     }
 // });
-
 
 
 router.post('/', (req, res) => {

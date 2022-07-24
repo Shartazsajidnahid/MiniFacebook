@@ -77,7 +77,7 @@ export class StoryComponent implements OnInit {
         
         for(let i=0;i<this.fetchedStories.length;i++){
           this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
-          console.log(this.fetchedStories[i].storyUUID);
+          // console.log(this.fetchedStories[i].storyUUID);
         }
       
       }, (err: any) => {
