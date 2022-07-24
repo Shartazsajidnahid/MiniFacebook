@@ -21,7 +21,9 @@ export class PostComponent implements OnInit {
   }
 
   submitpost() {
-    
+    this.newpost.time = new Date();
+    console.log("TIME");
+    console.log(this.newpost.time);
     this.PostService.createPost(this.newpost).subscribe(
         (res: any) => {
           console.log('posted successfully');
@@ -33,5 +35,7 @@ export class PostComponent implements OnInit {
         }
       );
  }
+
+ 
 
 }
