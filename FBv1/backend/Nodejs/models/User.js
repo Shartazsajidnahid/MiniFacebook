@@ -23,6 +23,20 @@ var User = mongoose.model('User', {
     },
 });
 
+
+//methods
+userSchema.methods.verifyPassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
+userSchema.methods.generateJwt = function () {
+    return jwt.sign({ _id: this._id},
+        process.env.JWT_SECRET,
+    {
+        expiresIn: process.env.JWT_EXP
+    });
+}
+
 module.exports = {
     User: User
 };

@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
         console.log('logged in successfully: ' );
         console.log(res);
         // this.userservice.currentuser = res;
-        this.userservice.setToken(this.newuser.userid);
+        // this.userservice.setToken(this.newuser.userid);
+        localStorage.setItem('token', res);
         this.router.navigate(['homepage']);
         // alert(this.userservice.getToken());
       }, (err: any) => {

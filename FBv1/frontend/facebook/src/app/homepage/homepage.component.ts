@@ -59,6 +59,7 @@ export class HomepageComponent implements OnInit {
       console.log("Filtered array");
       console.log(this.postArr);
   }
+  
  sortByLastModifiedDesc() {
     this.postArr =  this.postArr.sort((a: any, b: any) => {
       return <any>new Date(b.time) - <any>new Date(a.time);

@@ -4,10 +4,12 @@ const cors = require('cors');
 const multer = require('multer');
 const router = express.Router();
 const app=express();
+require('./config/passportConfig');
 
 
 const { mongoose } = require('./db.js');
 const { minioClient } = require('./connectminio.js');
+const passport = require('passport');
 
 
 var employeeController = require('./controllers/userController.js');
@@ -16,6 +18,7 @@ var storyController = require('./controllers/storyController.js');
 
 
 app.use(bodyParser.json());
+app.use(passport.initialize());
 // app.use(cors({ origin: 'http://localhost:4200' }));.
 app.use(cors());
 

@@ -15,7 +15,7 @@ import { Post } from '../post';
 })
 export class StoryComponent implements OnInit {
   // userDetails;
-  currentUserId : String = "";
+  currentUserId: String = "";
 
 
   Posts: any = [];
@@ -41,16 +41,16 @@ export class StoryComponent implements OnInit {
     time: new Date()
   }
   fetchedStories: any;
-  minioHost: string="127.0.0.1";
-  port: string="9000";
-  bucket: string="story";
+  minioHost: string = "127.0.0.1";
+  port: string = "9000";
+  bucket: string = "story";
 
 
   constructor(private postService: PostService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.currentUserId = this.userService.getToken();
-    
+
     this.getPosts();
   }
 
@@ -64,22 +64,23 @@ export class StoryComponent implements OnInit {
   //       console.log(this.fetchedStories[i].storyUUID);
   //     }
   //   });
-  
+
   // }
 
-  getPosts(){
+  getPosts() {
     this.postService.getStories().subscribe(
       (res: any) => {
-        console.log('Got stories ' );
+        console.log('Got stories ');
         console.log(res.body);
         this.allStory = res;
         this.fetchedStories = this.allStory;
-        
-        for(let i=0;i<this.fetchedStories.length;i++){
-          this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
-          // console.log(this.fetchedStories[i].storyUUID);
+        this.sortByLastModifiedDesc();
+
+        for (let i = 0; i < this.fetchedStories.length; i++) {
+          this.fetchedStories[i].storyUUID = "http://" + this.minioHost + ":" + this.port + "/" + this.bucket + "/" + this.fetchedStories[i].storyUUID;
+          // console.log(this.fetchedStories[i].time);
         }
-      
+
       }, (err: any) => {
         console.log('error');
       }
@@ -107,10 +108,10 @@ export class StoryComponent implements OnInit {
           console.log('Story Done');
           alert("Story added successfully");
         }
-        else{ 
+        else {
           console.log("story not done")
         }
-          // this.fetchStory();
+        // this.fetchStory();
       })
     }
   }
@@ -123,17 +124,17 @@ export class StoryComponent implements OnInit {
   pos = new Post();
 
 
-  check(){
+  check() {
 
     this.pos.content = "yo";
     this.pos.userid = "nahid";
 
     this.postService.checkpostStory(this.pos).subscribe((res) => {
 
-    // this.postService.checkpostStory(this.pos);
-  });
+      // this.postService.checkpostStory(this.pos);
+    });
 
-}
+  }
 
 
   onLogout() {
@@ -141,14 +142,30 @@ export class StoryComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-//   filterStories(){
-//     this.fetchedStories = this.fetchedStories.filter(
-//         book => book.userid  != this.currentUserId);
-    
-//     console.log("Filtered story array");
-//     console.log(this.fetchedStories);
-// }
+  //   filterStories(){
+  //     this.fetchedStories = this.fetchedStories.filter(
+  //         book => book.userid  != this.currentUserId);
 
+  //     console.log("Filtered story array");
+  //     console.log(this.fetchedStories);
+  // }
+
+  sortByLastModifiedDesc() {
+    this.fetchedStories = this.fetchedStories.sort((a: any, b: any) => {
+      return <any>new Date(b.time) - <any>new Date(a.time);
+    });
+    // this.fetchedStories = this.fetchedStories.slice(0,10);
+  }
+
+  // filterPosts() {
+  //   for (let i = 0; i < this.fetchedStories.length; i++) {
+  //     if (this.fetchedStories[i].name == this.currentUserId) {
+  //       co
+  //       this.fetchedStories.splice(i, 1);
+  //     }
+  //     // console.log(this.fetchedStories[i].time);
+  //   }
+  // }
 
 
 }

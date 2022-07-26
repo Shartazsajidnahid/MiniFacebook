@@ -25,11 +25,15 @@ export class UserService {
     // return this.http.get(this.baseurl);
   }
 
-  public userlogin(newuser: User) {
+  public userlogin(body: User) {
     console.log("hey");
-    console.log(newuser);
-    this.setToken(newuser.userid);
-    return this.http.put(this.baseurl, newuser);
+    console.log(body);
+    this.setToken(body.userid);
+    // return this.http.put(this.baseurl, newuser);
+    return this.http.put(this.baseurl, body, {
+      observe: 'body'
+    })
+
   }
 
   public userregistration(newuser: User) {

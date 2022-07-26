@@ -1,5 +1,6 @@
 const express = require('express');
 const { isValidObjectId } = require('../db');
+var jwt = require('jsonwebtoken');
 var router = express.Router();
 
 var { User } = require('../models/User');
@@ -34,13 +35,18 @@ router.put('/', (req, res) => {
     User.findOne({ userid: customer.userid }, (err, user) => {
         if (!err) {
             if (user) {
-                if (user.password == customer.password)
-                    res.send(user);
+                if (user.password == customer.password){
+                    //generate token 
+                    let token = jwt.sign({userid: customer.userid}, 'secret', {expiresIn: '3h'});
+                    return res.status(200).json(token);
+                    // res.send(user);
+                }
+                    
                 else
                     return res.status(400).send('Wrong password');
             } else
                 return res.status(400).send('User not registerd');
-        } else
+        } else 
             console.log('Error in fetching data: ' + JSON.stringify(err, undefined, 2));
     });
 });
@@ -67,5 +73,16 @@ router.post('/', (req, res) => {
     });
 });
 
+module.exports.authenticate = (req, res, next) => {
+    // call for passport authentication
+    passport.authenticate('local', (err, user, info) => {       
+        // error from passport middleware
+        if (err) return res.status(400).json(err);
+        // registered user
+        else if (user) return res.status(200).json({ "token": user.generateJwt() });
+        // unknown user or wrong password
+        else return res.status(404).json(info);
+    })(req, res);
+}
 
 module.exports = router;
