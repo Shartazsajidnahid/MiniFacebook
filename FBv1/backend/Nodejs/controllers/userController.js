@@ -2,6 +2,7 @@ const express = require('express');
 const { isValidObjectId } = require('../db');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
+const passport = require('passport');
 
 var { User } = require('../models/User');
 
@@ -13,6 +14,8 @@ router.get('/', (req, res) => {
             console.log('Error in receiving customer: ' + JSON.stringify(err, undefined, 2));
     });
 });
+
+
 
 router.get('/:id', (req, res) => {
     if (!isValidObjectId(req.params.id))

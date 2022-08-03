@@ -1,0 +1,37 @@
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand">Facebook mini</a>
+    <form class="form-inline">
+        <p class="" style="margin-right: 1rem;">{{currentUserId}}</p>
+        <!-- <a class="" href="#" style="margin-right: 1rem;">{{currentUserId}}</a> -->
+        <button class="btn btn-danger" type="submit" (click)="logout()">Logout</button>
+    </form>
+</nav>
+<!-- <h1>hey</h1> -->
+<!-- <div style="width: 50rem; ">
+    <app-story></app-story>
+
+</div> -->
+
+<div class="container " >
+    <div class="row ">
+        <div class=" col-12 " style="width: 300px; ">
+           <app-story></app-story>
+        </div>
+    </div>
+</div>
+<hr>
+<app-post></app-post>
+
+
+
+<div class="container margin-top-0" *ngFor="let posts of postArr ">
+    <div class="row ">
+        <div class="card col-12 " style="width: 300px; ">
+            <div class="card-body ">
+                <h5 class="card-title ">{{posts.userid}}</h5>
+                <!-- <h6 class="card-subtitle mb-3 text-muted ">Champ de Mars, Paris, France</h6> -->
+                <p class="card-text ">{{posts.content}}</p>
+            </div>
+        </div>
+    </div>
+</div>
