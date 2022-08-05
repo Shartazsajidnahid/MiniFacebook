@@ -49,7 +49,7 @@ export class StoryComponent implements OnInit {
   constructor(private postService: PostService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.currentUserId = this.userService.getToken();
+    // this.currentUserId = this.userService.getToken();
 
     this.getPosts();
   }
@@ -124,17 +124,17 @@ export class StoryComponent implements OnInit {
   pos = new Post();
 
 
-  check() {
+  // check() {
 
-    this.pos.content = "yo";
-    this.pos.userid = "nahid";
+  //   this.pos.content = "yo";
+  //   this.pos.userid = "nahid";
 
-    this.postService.checkpostStory(this.pos).subscribe((res) => {
+  //   this.postService.checkpostStory(this.pos).subscribe((res) => {
 
-      // this.postService.checkpostStory(this.pos);
-    });
+  //     // this.postService.checkpostStory(this.pos);
+  //   });
 
-  }
+  // }
 
 
   onLogout() {

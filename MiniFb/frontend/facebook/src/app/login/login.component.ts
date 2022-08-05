@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private userservice: UserService, private router: Router) {
     this.angForm = this.fb.group({
       password: new FormControl('', [Validators.required]),
-      userid: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
 
       // userid: ['', Validators.required]
     });
@@ -27,17 +27,20 @@ export class LoginComponent implements OnInit {
   }
 
 
-  postdata1(angForm1: { value: { userid:any; password: any; }; }) {
-    this.newuser.userid = angForm1.value.userid;
+  postdata1(angForm1: { value: { email:any; password: any; }; }) {
+    this.newuser.email = angForm1.value.email;
     this.newuser.password = angForm1.value.password;
     console.log("from login comp");
-    this.userservice.userlogin(this.newuser).subscribe(
+    this.userservice.loadPotentialUser(this.newuser);
+    this.userservice.authUser(this.userservice.potentialUser).subscribe(
       (res: any) => {
         console.log('logged in successfully: ' );
         console.log(res);
+        this.userservice.setToken(res);
+
         // this.userservice.currentuser = res;
         // this.userservice.setToken(this.newuser.userid);
-        localStorage.setItem('token', res);
+        // localStorage.setItem('token', res);
         this.router.navigate(['homepage']);
         // alert(this.userservice.getToken());
       }, (err: any) => {

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-primary">
     <a class="navbar-brand">Facebook mini</a>
     <form class="form-inline">
-        <p class="" style="margin-right: 1rem;">{{currentUserId}}</p>
+        <p class="" style="margin-right: 1rem;">{{currentUserName}}</p>
         <!-- <a class="" href="#" style="margin-right: 1rem;">{{currentUserId}}</a> -->
         <button class="btn btn-danger" type="submit" (click)="logout()">Logout</button>
     </form>
@@ -28,10 +28,11 @@
     <div class="row ">
         <div class="card col-12 " style="width: 300px; ">
             <div class="card-body ">
-                <h5 class="card-title ">{{posts.userid}}</h5>
-                <!-- <h6 class="card-subtitle mb-3 text-muted ">Champ de Mars, Paris, France</h6> -->
-                <p class="card-text ">{{posts.content}}</p>
+                <h5 class="card-title ">{{posts.fullName}}</h5>
+                 <h6 class="card-subtitle mb-3 text-muted ">{{posts.dom}}</h6> 
+                 <p class="card-text ">{{posts.status}}</p>
             </div>
         </div>
     </div>
-</div>
+</div>  
+

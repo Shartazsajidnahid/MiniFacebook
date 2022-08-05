@@ -17,18 +17,23 @@ export class PostComponent implements OnInit {
   newpost = new Post();
   
   ngOnInit(): void {
-    this.newpost.userid = String(this.userservice.getToken());
+    this.setCurrentUser();
   }
 
+  setCurrentUser(){
+    this.newpost.fullName = this.userservice.getLoggedUser().fullName;
+    this.newpost.email = this.userservice.getLoggedUser().email;
+    console.log("fullname service " + this.newpost.email);
+    
+  }
   submitpost() {
-    this.newpost.time = new Date();
-    console.log("TIME");
-    console.log(this.newpost.time);
-    this.PostService.createPost(this.newpost).subscribe(
+    this.newpost.dom = new Date();
+  
+    this.userservice.postStatus(this.newpost).subscribe(
         (res: any) => {
           console.log('posted successfully');
           console.log(res);
-          this.newpost.content="";
+          this.newpost.status="";
           alert("Post created successfully");
         }, (err: any) => {
           console.log('error');

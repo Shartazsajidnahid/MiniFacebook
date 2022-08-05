@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="input-group">
-        <textarea class="form-control" placeholder="What's on your mind?" rows="5" [(ngModel)]="newpost.content" [ngModelOptions]="{standalone: true}"></textarea>
+        <textarea class="form-control" placeholder="What's on your mind?" rows="5" [(ngModel)]="newpost.status" [ngModelOptions]="{standalone: true}"></textarea>
         <div class="input-group-append">
             <button type="submit" class="btn btn-primary" (click)="submitpost()">Create Post</button>
         </div>

@@ -1,6 +1,5 @@
-export class User {
+export class CurrentUser {
     fullName: string = "";
     email: string = "";
-    password: string="";
   }
   

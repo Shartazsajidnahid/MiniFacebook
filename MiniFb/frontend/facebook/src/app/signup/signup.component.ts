@@ -29,17 +29,17 @@ export class SignupComponent implements OnInit {
 
   postdata(angForm1: { value: { name: any; userid: any; email: any; phone: any; password: any; }; }) {
    // this.userservice.userregistration(angForm1.value.name, angForm1.value.email, angForm1.value.password);
-      this.newuser.name = angForm1.value.name;
-      this.newuser.userid = angForm1.value.userid;
+      this.newuser.fullName = angForm1.value.name;
+      // this.newuser.userid = angForm1.value.userid;
       this.newuser.email = angForm1.value.email;
       this.newuser.password = angForm1.value.password;
-      this.newuser.phone = angForm1.value.phone;
+      // this.newuser.phone = angForm1.value.phone;
 
-      if(!this.newuser.name || !this.newuser.userid || !this.newuser.email || !this.newuser.password || !this.newuser.phone){
+      if(!this.newuser.fullName || !this.newuser.email || !this.newuser.password){
         alert("Please fill up all credentials");
       }
-
-      this.userservice.userregistration(this.newuser).subscribe(
+      this.userservice.loadUser(this.newuser);
+      this.userservice.postUser().subscribe(
         (res: any) => {
           // console.log('hello')
           console.log(res);

@@ -1,6 +1,7 @@
 export class Post {
-    content: string = "";
-    userid: string = "";
-    time: Date | undefined;
+    status: string = "";
+    fullName: string = "";
+    email: string = "";
+    dom: Date = new Date();
   }
   
