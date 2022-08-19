@@ -24,7 +24,6 @@ export class PostComponent implements OnInit {
     this.newpost.fullName = this.userservice.getLoggedUser().fullName;
     this.newpost.email = this.userservice.getLoggedUser().email;
     console.log("fullname service " + this.newpost.email);
-    
   }
   submitpost() {
     this.newpost.dom = new Date();
