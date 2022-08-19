@@ -1,28 +1,20 @@
-const mongoose= require('mongoose');
-const bcrypt= require('bcryptjs');
-const jwt= require('jsonwebtoken');
-let imageSchema= new mongoose.Schema({
-    fullName:{
+const mongoose = require('mongoose');
+
+const storySchema = mongoose.Schema({
+    name:{
         type: String,
-        required: 'fullname can\'t be empty'
+        required: true
     },
-    email: {
+    storyUUID:{
         type: String,
-        required: 'email can\'t be empty'
+        required: true
     },
-    uuid: {
-        type: String,
-        required: 'password can\'t be empty'
-    },
-    path:{
-        type: String
-    },
-    dom: {
-        type: Date 
+    time:{
+        type: Date,
+        default: Date.now,
+        required: true
     }
+
 });
-imageSchema.methods.generateUUID=function(){
-    uid=uuidv4();
-    return uid;
-}
-mongoose.model('images',imageSchema);
+
+const story = module.exports = mongoose.model('story', storySchema);

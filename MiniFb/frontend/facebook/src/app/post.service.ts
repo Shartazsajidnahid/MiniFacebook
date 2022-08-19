@@ -5,6 +5,8 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Post } from './post';
 import { story } from './story';
+import { environment } from './environments/environment';
+
 
 
 
@@ -63,18 +65,15 @@ export class PostService {
   }
 
   postStory(story: any): Observable<any>{
-    console.log(story);
-    return this.http.post(this.storyurl, story); 
+    console.log("story");
+    return this.http.post(environment.apiBaseUrl + '/story', story); 
   }
 
   getStories(){
     console.log("all the stories here");
     console.log(this.http.get(this.storyurl2));
-    return this.http.get(this.storyurl2);
+    return this.http.get(environment.apiBaseUrl + '/story');
   }
 
-  checkpostStory(pos: Post){
-    return this.http.post(this.storyurl, pos); 
-  }
 }
 

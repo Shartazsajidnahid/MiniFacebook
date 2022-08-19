@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Post } from '../post';
 import { PostService } from '../post.service';
+import { SignupComponent } from '../signup/signup.component';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -47,9 +48,8 @@ export class HomepageComponent implements OnInit {
   }
 
   logout():void{
-    // this.userservice.currentuser = new User;
-    // this.userservice.deleteToken();
-    // this.router.navigate(['login']);
+    this.userservice.deleteToken();
+    this.router.navigate(['signup'])
   }
 
   filterPosts(){

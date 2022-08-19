@@ -13,7 +13,7 @@ module.exports.getStatus=(req,res,next)=>{
         (err,post)=>{
             // if (!post) return res.status(404).json({ status: false, message: 'No post.' });
             // else return res.status(200).json({ status: true, post : _.pick(post,['fullName','email']) });
-            console.log(post);
+            // console.log(post);
             if(!post)res.status(404).send("Not found");
             else res.status(200).send(post);
         }

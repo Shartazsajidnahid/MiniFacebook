@@ -15,7 +15,7 @@ import { Post } from '../post';
 })
 export class StoryComponent implements OnInit {
   // userDetails;
-  currentUserId: String = "";
+  currentUserName: String = "";
 
 
   Posts: any = [];
@@ -49,23 +49,17 @@ export class StoryComponent implements OnInit {
   constructor(private postService: PostService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    // this.currentUserId = this.userService.getToken();
+    this.currentUserName = this.userService.getLoggedUser().fullName;
 
     this.getPosts();
   }
 
+  setCurrentUser(){
+    // this.newStory.name = this.userService.getLoggedUser().fullName;
 
-  // fetchStory() {
-  //     this.postService.getStories().subscribe((data) =>{
-  //     this.allStory = data.body;
-  //     this.fetchedStories = this.allStory;
-  //     for(let i=0;i<this.fetchedStories.length;i++){
-  //       this.fetchedStories[i].storyUUID = "http://"+this.minioHost+":"+this.port+"/"+this.bucket+"/"+this.fetchedStories[i].storyUUID;
-  //       console.log(this.fetchedStories[i].storyUUID);
-  //     }
-  //   });
+  }
 
-  // }
+
 
   getPosts() {
     this.postService.getStories().subscribe(
@@ -99,7 +93,7 @@ export class StoryComponent implements OnInit {
 
       const formData = new FormData();
       formData.append('files', this.file);
-      formData.append('name', String(this.currentUserId));
+      formData.append('name', String(this.currentUserName));
       console.log("formdata");
       console.log(formData);
 
@@ -117,30 +111,6 @@ export class StoryComponent implements OnInit {
   }
 
 
-
-
-
-
-  pos = new Post();
-
-
-  // check() {
-
-  //   this.pos.content = "yo";
-  //   this.pos.userid = "nahid";
-
-  //   this.postService.checkpostStory(this.pos).subscribe((res) => {
-
-  //     // this.postService.checkpostStory(this.pos);
-  //   });
-
-  // }
-
-
-  onLogout() {
-    this.userService.deleteToken();
-    this.router.navigate(['/login']);
-  }
 
   //   filterStories(){
   //     this.fetchedStories = this.fetchedStories.filter(

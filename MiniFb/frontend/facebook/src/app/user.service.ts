@@ -105,15 +105,5 @@ export class UserService {
     return this.http.post(environment.apiBaseUrl + '/status', newStatus);
   }
 
-  getStories(email: string): Observable<story[]> {
-    const toAdd: any = { 'email': email };
-    let header = new HttpHeaders(toAdd);
-    return this.http.get<story[]>(environment.apiBaseUrl + '/story', { headers: header })
-  }
-
-  postStory(formData: any) {
-    console.log(formData);
-    return this.http.post(environment.apiBaseUrl + '/story', formData, { headers: this.storyHeader });
-  }
 
 }

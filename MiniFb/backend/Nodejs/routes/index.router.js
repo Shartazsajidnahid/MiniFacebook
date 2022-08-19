@@ -9,18 +9,20 @@ const imageHelper = require('../controllers/storyController');
 
 const multer = require('multer');
 
-const PATH = './uploads';
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, PATH);
+
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads')
     },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
     }
-});
-let upload = multer({
-    storage: storage
-});
+})
+var upload = multer({ storage: storage })
+
+
+
 
 router.get('/alluser', ctrlUser.getAlluser);
 
@@ -31,9 +33,14 @@ router.post('/login', ctrlUser.authenticate, jwtHelper.verifyJwtToken, ctrlUser.
 router.get('/userProfile', jwtHelper.verifyJwtToken, ctrlUser.userProfile);
 router.post('/status', ctrlPost.postStatus);
 router.get('/status', ctrlPost.getStatus);
-router.post('/story', upload.single("image"), imageHelper.generateUUID, imageHelper.uploadImageIDmongoDB, imageHelper.uploadImage);
-router.get('/story', imageHelper.getUuidForUser);
+// router.post('/story', upload.single("image"), imageHelper.generateUUID, imageHelper.uploadImageIDmongoDB, imageHelper.uploadImage);
+// router.get('/story', imageHelper.getUuidForUser);
 // router.post('/story',imageHelper.getStatus);
 
+// Add Story
+router.post('/story', upload.single("files"), imageHelper.CreateStory);
+//Get story
+router.get('/story', imageHelper.getStory);
 
+// router.use('/story', imageHelper);
 module.exports = router;

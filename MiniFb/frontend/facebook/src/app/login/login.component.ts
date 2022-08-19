@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.newuser.password = angForm1.value.password;
     console.log("from login comp");
     this.userservice.loadPotentialUser(this.newuser);
+    
     this.userservice.authUser(this.userservice.potentialUser).subscribe(
       (res: any) => {
         console.log('logged in successfully: ' );
