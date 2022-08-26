@@ -55,25 +55,28 @@ export class PostService {
 
   public getPost() {
     console.log("getpost from service");
-    return this.http.get(this.baseurl);
+    return this.http.get('http://localhost:8080' + '/post');
   }
 
   public createPost(newpost: Post) {
     console.log("hey from createpost postservice");
     console.log(this.baseurl, newpost, this.http);
-    return this.http.post(this.baseurl, newpost);
+    return this.http.post('http://localhost:8080' + '/post', newpost);
   }
 
   postStory(story: any): Observable<any>{
     console.log("story");
-    return this.http.post(environment.apiBaseUrl + '/story', story); 
+    return this.http.post('http://localhost:8080' + '/story', story); 
+  }
+
+  postStory2(story: any): Observable<any>{
+    console.log("story");
+    return this.http.post('http://localhost:8080' + '/story', story); 
   }
 
   getStories(){
     console.log("all the stories here");
     console.log(this.http.get(this.storyurl2));
-    return this.http.get(environment.apiBaseUrl + '/story');
+    return this.http.get('http://localhost:8080' + '/story');
   }
-
 }
-

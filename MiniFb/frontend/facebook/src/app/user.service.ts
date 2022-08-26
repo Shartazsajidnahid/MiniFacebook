@@ -35,11 +35,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   postUser() {
-    return this.http.post( environment.apiBaseUrl + '/register', this.newUser);
+    return this.http.post( 'http://localhost:8080'+ '/auth/register', this.newUser);
   }
 
   authUser(potentialUser: { email: string; password: string; }) {
-    return this.http.post(environment.apiBaseUrl + '/login', potentialUser);
+    return this.http.post('http://localhost:8080'+ '/auth/login', potentialUser);
   }
 
   loadUser(user: User) {
@@ -61,8 +61,8 @@ export class UserService {
     localStorage.setItem('token', token.token);
     localStorage.setItem('tokenName', token.fullName);
     localStorage.setItem('tokenEmail', token.email);
-
   }
+  
   getLoggedUser() {
     this.currentUser.email = String(localStorage.getItem('tokenEmail'));
     this.currentUser.fullName = String(localStorage.getItem('tokenName'));
@@ -97,12 +97,12 @@ export class UserService {
   getUserPosts(): Observable<Post[]> {
     const toAdd: any = { 'email': this.currentUser.email };
     let header = new HttpHeaders(toAdd);
-    return this.http.get<Post[]>(environment.apiBaseUrl + '/status', { headers: header })
+    return this.http.get<Post[]>('http://localhost:8080' + '/post', { headers: header })
   }
 
   postStatus(newStatus: Post) {
     console.log(newStatus)
-    return this.http.post(environment.apiBaseUrl + '/status', newStatus);
+    return this.http.post('http://localhost:8080'+ '/post', newStatus);
   }
 
 
