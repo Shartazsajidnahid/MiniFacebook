@@ -49,7 +49,7 @@ export class HomepageComponent implements OnInit {
 
   logout():void{
     this.userservice.deleteToken();
-    this.router.navigate(['signup'])
+    this.router.navigate(['login'])
   }
 
   filterPosts(){
