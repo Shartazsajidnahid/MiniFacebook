@@ -35,13 +35,10 @@ export class LoginComponent implements OnInit {
     
     this.userservice.authUser(this.userservice.potentialUser).subscribe(
       (res: any) => {
-        console.log('logged in successfully: ' );
+        console.log("token details: ")
         console.log(res);
-        this.userservice.setToken(res);
+        this.userservice.setToken(res['token']);
 
-        // this.userservice.currentuser = res;
-        // this.userservice.setToken(this.newuser.userid);
-        // localStorage.setItem('token', res);
         this.router.navigate(['homepage']);
         // alert(this.userservice.getToken());
       }, (err: any) => {

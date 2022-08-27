@@ -25,6 +25,7 @@ export class UserService {
   };
 
   currentUser: CurrentUser = new CurrentUser();
+  noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
   storyHeader = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -35,11 +36,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   postUser() {
-    return this.http.post( 'http://localhost:8080'+ '/auth/register', this.newUser);
+    return this.http.post( 'http://localhost:8080'+ '/auth/register', this.newUser, this.noAuthHeader);
   }
 
   authUser(potentialUser: { email: string; password: string; }) {
-    return this.http.post('http://localhost:8080'+ '/auth/login', potentialUser);
+    return this.http.post('http://localhost:8080'+ '/auth/login', potentialUser, this.noAuthHeader);
   }
 
   loadUser(user: User) {
@@ -57,10 +58,10 @@ export class UserService {
   }
 
   setToken(token: any) {
-    this.setLoggedUser(token.fullName, token.email);
-    localStorage.setItem('token', token.token);
-    localStorage.setItem('tokenName', token.fullName);
-    localStorage.setItem('tokenEmail', token.email);
+    localStorage.setItem('token', token);
+  }
+  getToken(){
+    return localStorage.getItem('token');
   }
   
   getLoggedUser() {
@@ -71,14 +72,16 @@ export class UserService {
 
   deleteToken() {
     localStorage.removeItem('token');
-    localStorage.removeItem('tokenName');
-    localStorage.removeItem('tokenEmail');
+  }
+
+  getUserProfile(){
+    return this.http.get('http://localhost:8080'+ '/auth/userProfile');
   }
 
   getUserPayload() {
     let token = localStorage.getItem('token');
     if (token) {
-      let payLoad: string = atob(token.split('.')[1]);
+      let payLoad: string = window.atob(token.split('.')[1]);
       return JSON.parse(payLoad);
     }
     else {
@@ -97,12 +100,12 @@ export class UserService {
   getUserPosts(): Observable<Post[]> {
     const toAdd: any = { 'email': this.currentUser.email };
     let header = new HttpHeaders(toAdd);
-    return this.http.get<Post[]>('http://localhost:8080' + '/post', { headers: header })
+    return this.http.get<Post[]>('http://localhost:8080' + '/post', this.noAuthHeader)
   }
 
   postStatus(newStatus: Post) {
     console.log(newStatus)
-    return this.http.post('http://localhost:8080'+ '/post', newStatus);
+    return this.http.post('http://localhost:8080' + '/post', this.noAuthHeader);
   }
 
 

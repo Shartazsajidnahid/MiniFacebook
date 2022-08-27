@@ -45,19 +45,38 @@ export class StoryComponent implements OnInit {
   port: string = "9000";
   bucket: string = "story";
 
+  userdetails: any;
 
   constructor(private postService: PostService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.currentUserName = this.userService.getLoggedUser().fullName;
-
+    // this.currentUserName = this.userService.getLoggedUser().fullName;
+    this.setCurrentUserName();
     this.getPosts();
   }
+  setCurrentUserName(){
+    // this.currentUserName = this.userservice.getLoggedUser().fullName;
+    this.userService.getUserProfile().subscribe(
+      (res:any) => {
+        console.log("res");
+        console.log(res);
+        this.userdetails = res['user'];
+        this.currentUserName = this.userdetails.fullName;
+        console.log("user details: ");
+        console.log(this.currentUserName);
+        console.log(this.userdetails);
 
-  setCurrentUser(){
-    // this.newStory.name = this.userService.getLoggedUser().fullName;
+      },
+      (err: any) => {
+        console.log("error");
+      }
+    )
+    
+    // console.log(this.currentUserName);
 
+    
   }
+
 
 
 

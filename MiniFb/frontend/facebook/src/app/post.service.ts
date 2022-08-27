@@ -41,6 +41,7 @@ export class PostService {
     'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
     'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
   });
+  noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
 
   constructor(private http: HttpClient) {}
@@ -55,28 +56,29 @@ export class PostService {
 
   public getPost() {
     console.log("getpost from service");
-    return this.http.get('http://localhost:8080' + '/post');
+    return this.http.get('http://localhost:8080' + '/post', this.noAuthHeader );
   }
 
   public createPost(newpost: Post) {
-    console.log("hey from createpost postservice");
-    console.log(this.baseurl, newpost, this.http);
-    return this.http.post('http://localhost:8080' + '/post', newpost);
+    
+    return this.http.post('http://localhost:8080' + '/post', newpost, this.noAuthHeader);
   }
 
   postStory(story: any): Observable<any>{
     console.log("story");
-    return this.http.post('http://localhost:8080' + '/story', story); 
+    return this.http.post('http://localhost:8080' + '/story', story, this.noAuthHeader); 
   }
 
   postStory2(story: any): Observable<any>{
     console.log("story");
-    return this.http.post('http://localhost:8080' + '/story', story); 
+    return this.http.post('http://localhost:8080' + '/story', story,this.noAuthHeader); 
   }
 
   getStories(){
     console.log("all the stories here");
     console.log(this.http.get(this.storyurl2));
-    return this.http.get('http://localhost:8080' + '/story');
+    return this.http.get('http://localhost:8080' + '/story', this.noAuthHeader);
   }
+  
+
 }

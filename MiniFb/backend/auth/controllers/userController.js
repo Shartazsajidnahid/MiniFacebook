@@ -19,19 +19,11 @@ module.exports.register =(req,res,next)=>{
 
 }
 
-// module.exports.authenticate =(req,res,next)=>{
-//    passport.authenticate('local', (err, user, info)=>{
-//         if(err)return res.status(400).json(err);
-//         else if(user)return res.status(200).json({"token": user.generateJwt()});
-//         else return res.status(404).json(info);
-//    })(req,res);
-
-// }
 module.exports.authenticate =(req,res,next)=>{
     passport.authenticate('local', (err, user, info)=>{
          if(err)return res.status(400).json(err);
          else if(user){
-             req.headers={"authorization": user.generateJwt()};
+             return res.status(200).json({"token": user.generateJwt()});
              next();
          }
          else return res.status(404).json(info);
@@ -40,17 +32,13 @@ module.exports.authenticate =(req,res,next)=>{
  }
 
 module.exports.userProfile=(req, res, next)=>{
+    // console.log(req);
     User.findOne({ _id: req._id },
         (err, user) => {
             if (!user) return res.status(404).json({ status: false, message: 'User record not found.' });
             // else return res.status(200).json({ status: true, user : _.pick(user,['fullName','email','token']) });
             else{
-                loggeduser={
-                    fullName:user.fullName,
-                    email : user.email,
-                    token : req.token
-                };
-                return res.status(200).json(loggeduser);
+                return res.status(200).json({ status: true, user: _.pick(user, ['fullName','email'])});
             }
         }
     );
@@ -61,7 +49,7 @@ module.exports.getAlluser=(req, res, next)=>{
         if (!err)
             res.send(doc);
         else
-            console.log('Error in receiving customer: ' + JSON.stringify(err, undefined, 2));
+            console.log('Error in receiving user: ' + JSON.stringify(err, undefined, 2));
     });
 }
 

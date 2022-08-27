@@ -15,20 +15,39 @@ export class PostComponent implements OnInit {
   constructor(private PostService: PostService, private router: Router, private userservice: UserService) { }
 
   newpost = new Post();
-  
+  userdetails: any;
   ngOnInit(): void {
-    this.setCurrentUser();
+    this.setCurrentUserName();
   }
 
-  setCurrentUser(){
-    this.newpost.fullName = this.userservice.getLoggedUser().fullName;
-    this.newpost.email = this.userservice.getLoggedUser().email;
-    console.log("fullname service " + this.newpost.email);
+  setCurrentUserName(){
+    // this.currentUserName = this.userservice.getLoggedUser().fullName;
+    this.userservice.getUserProfile().subscribe(
+      (res:any) => {
+        console.log("res");
+        console.log(res);
+        this.userdetails = res['user'];
+        this.newpost.fullName = this.userdetails.fullName;
+        this.newpost.email = this.userdetails.email;
+        // console.log("user details: ");
+        // // console.log(this.currentUserName);
+        // console.log(this.userdetails);
+
+      },
+      (err: any) => {
+        console.log("error");
+      }
+    )
+    
+    // console.log(this.currentUserName);
+
+    
   }
+
   submitpost() {
     this.newpost.dom = new Date();
   
-    this.userservice.postStatus(this.newpost).subscribe(
+    this.PostService.createPost(this.newpost).subscribe(
         (res: any) => {
           console.log('posted successfully');
           console.log(res);

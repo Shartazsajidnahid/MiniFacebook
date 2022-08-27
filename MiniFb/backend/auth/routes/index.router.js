@@ -12,7 +12,7 @@ router.get('/alluser', ctrlUser.getAlluser);
 
 
 router.post('/auth/register', ctrlUser.register);
-router.post('/auth/login', ctrlUser.authenticate, jwtHelper.verifyJwtToken, ctrlUser.userProfile);
+router.post('/auth/login', ctrlUser.authenticate);
 router.get('/auth/userProfile', jwtHelper.verifyJwtToken, ctrlUser.userProfile);
 
 // router.use('/story', imageHelper);

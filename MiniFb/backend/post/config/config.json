@@ -1,6 +1,6 @@
 {
     "development":{
-        "PORT": 3001,
+        "PORT": 3005,
         "MONGODB_URI": "mongodb://localhost:27017/FBmini",
         "JWT_SECRET" : "SECRET#123",
         "JWT_EXP": "2m"

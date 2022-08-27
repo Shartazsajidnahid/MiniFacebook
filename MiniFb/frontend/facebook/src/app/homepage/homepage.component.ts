@@ -19,7 +19,7 @@ export class HomepageComponent implements OnInit {
   currentUserName: String = "";
 
   postArr: Post[] = [];
-
+  userdetails: any;
   ngOnInit(): void {
     this.setCurrentUserName();
     this.getPosts();
@@ -27,7 +27,25 @@ export class HomepageComponent implements OnInit {
   }
 
   setCurrentUserName(){
-    this.currentUserName = this.userservice.getLoggedUser().fullName;
+    // this.currentUserName = this.userservice.getLoggedUser().fullName;
+    this.userservice.getUserProfile().subscribe(
+      (res:any) => {
+        console.log("res");
+        console.log(res);
+        this.userdetails = res['user'];
+        this.currentUserName = this.userdetails.fullName;
+        console.log("user details: ");
+        console.log(this.currentUserName);
+        console.log(this.userdetails);
+
+      },
+      (err: any) => {
+        console.log("error");
+      }
+    )
+    
+    // console.log(this.currentUserName);
+
     
   }
 
@@ -37,7 +55,7 @@ export class HomepageComponent implements OnInit {
         console.log('Got posts ' );
         console.log(res);
         this.postArr = res as Post[];
-        // this.filterPosts();
+        this.filterPosts();
         // this.sortByLastModifiedDesc();
       }, (err: any) => {
         console.log('error');
@@ -53,11 +71,11 @@ export class HomepageComponent implements OnInit {
   }
 
   filterPosts(){
-      // this.postArr = this.postArr.filter(
-      //     book => book.userid  != this.currentUserId);
+      this.postArr = this.postArr.filter(
+          book => book.fullName  != this.currentUserName);
       
-      // console.log("Filtered array");
-      // console.log(this.postArr);
+      console.log("Filtered array");
+      console.log(this.postArr);
   }
   
  sortByLastModifiedDesc() {

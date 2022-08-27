@@ -9,6 +9,7 @@ const Post=mongoose.model('Post');
 
 
 module.exports.getStatus=(req,res,next)=>{
+    console.log(req.headers['email']);
     Post.find({ email: { $ne: req.headers['email'] }},
         (err,post)=>{
             // if (!post) return res.status(404).json({ status: false, message: 'No post.' });
@@ -19,12 +20,15 @@ module.exports.getStatus=(req,res,next)=>{
         }
     ).sort({dom: -1}).limit(10);
 }
+
 module.exports.postStatus=(req,res,next)=>{
+    // console.log(req);
     const post=new Post();
     post.fullName=req.body.fullName;
     post.email=req.body.email;
     post.status=req.body.status;
     post.dom=new Date();
+
     post.save((err,doc)=>{
         if(!err){
             res.send(doc);
