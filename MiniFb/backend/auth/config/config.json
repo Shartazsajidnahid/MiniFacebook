@@ -1,7 +1,7 @@
 {
     "development":{
         "PORT": 3000,
-        "MONGODB_URI": "mongodb://mongo:27017/AuthDB",
+        "MONGODB_URI": "mongodb://db-account/AccountDatabase",
         "JWT_SECRET" : "SECRET#123",
         "JWT_EXP": "2m"
     },
