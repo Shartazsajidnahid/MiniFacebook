@@ -90,8 +90,10 @@ export class StoryComponent implements OnInit {
         this.sortByLastModifiedDesc();
 
         for (let i = 0; i < this.fetchedStories.length; i++) {
-          this.fetchedStories[i].storyUUID = "http://" + this.minioHost + ":" + this.port + "/" + this.bucket + "/" + this.fetchedStories[i].storyUUID;
+          // this.fetchedStories[i].storyUUID = "http://" + this.minioHost + ":" + this.port + "/" + this.bucket + "/" + this.fetchedStories[i].storyUUID;
           // console.log(this.fetchedStories[i].time);
+
+          this.fetchedStories[i].storyUUID = "http://localhost:8080/story/" + this.fetchedStories[i].storyUUID;
         }
 
       }, (err: any) => {

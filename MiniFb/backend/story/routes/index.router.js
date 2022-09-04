@@ -25,6 +25,7 @@ var upload = multer({ storage: storage })
 router.post('/story', upload.single("files"), imageHelper.CreateStory);
 //Get story
 router.get('/story', imageHelper.getStory);
+router.get('/story/:id', imageHelper.getImage);
 
 // router.use('/story', imageHelper);
 module.exports = router;

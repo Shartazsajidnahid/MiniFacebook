@@ -56,9 +56,16 @@ module.exports.CreateStory = (async (req, res) => {
 
     const minioClient = minio();
 
+
+    minioClient.makeBucket('story', 'us-east-1', function(err) {
+        if (err) return console.log('Error creating bucket.', err)
+        console.log('Bucket created successfully in "us-east-1".')
+    });
+
+
     //PutObject(bucketName, objectName, stream, size, metaData[, callback])
 
-    var uuidName = crypto.randomUUID();
+    var uuidName = crypto.randomUUID() + ".png";
     console.log(JSON.stringify(req.file))
     minioClient.fPutObject('story', uuidName, req.file.path, function (err, objInfo) {
 
@@ -111,10 +118,38 @@ exports.getStory = (async (req,res) =>{
 
 function minio() {
     return new Minio.Client({
-        endPoint: '127.0.0.1',
+        endPoint: 'storyobjectdb',
         port: 9000,
         useSSL: false,
         accessKey: 'minioadmin',
         secretKey: 'minioadmin'
     });
 }
+
+exports.getImage = ( (req,res) =>{
+  
+    try {
+        let data;
+         minioClient = minio();
+         minioClient.getObject("story", req.params.id, (err, objStream) => {
+           
+            if(err) {
+                return res.status(404).send({ message: "Image not found" });
+            }
+            objStream.on('data', (chunk) => {
+                console.log("eta error 1?");
+                data = !data ? new Buffer(chunk) : Buffer.concat([data, chunk]);
+
+            });
+            console.log(req.params.id);
+       
+            objStream.on('end', () => {
+                res.writeHead(200, { 'Content-Type': 'image/png' });
+                res.write(data);
+                res.end();
+            });
+        });
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error at fetching image" });
+    }
+});
