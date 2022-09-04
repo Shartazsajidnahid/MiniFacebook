@@ -17,30 +17,18 @@ services:
       - 27020:27017
     volumes:
       - account:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_ROOT_DATABASE: root-db
   db-status:
     image: mongo:4.0-xenial
     ports:
       - 27018:27017
     volumes:
       - status:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_ROOT_DATABASE: root-db
   db-story:
     image: mongo:4.0-xenial
     ports:
       - 27019:27017
     volumes:
       - story:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_ROOT_DATABASE: root-db
 
   storyobjectdb:
     image: minio/minio:latest
@@ -54,7 +42,7 @@ services:
     build: ./auth
     restart: unless-stopped
     ports:
-      - 3001:3001
+      - 3000:3000
     depends_on:
       - db-account
     environment:
@@ -64,7 +52,7 @@ services:
     build: ./post
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - 3001:3001
     depends_on:
       - account-service
       - db-status
@@ -76,7 +64,7 @@ services:
     build: ./story
     restart: unless-stopped
     ports:
-      - 3003:3003
+      - 3002:3002
     depends_on:
       - db-story
       - account-service

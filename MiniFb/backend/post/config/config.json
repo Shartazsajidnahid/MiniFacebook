@@ -1,6 +1,6 @@
 {
     "development":{
-        "PORT": 3005,
+        "PORT": 3001,
         "MONGODB_URI": "mongodb://db-status/StatusDatabase",
         "JWT_SECRET" : "SECRET#123",
         "JWT_EXP": "2m"
