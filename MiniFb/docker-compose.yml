@@ -1,7 +1,8 @@
-version: "3"
+version: "3.7"
 services:
   nginx:
-    image: nginx
+    image: nahid9658/nginx
+    build: .
     restart: unless-stopped
     ports:
       - 8080:8080
@@ -11,6 +12,8 @@ services:
       - account-service
       - status-service
       - story-service
+
+
   db-account:
     image: mongo:4.0-xenial
     ports:
@@ -31,7 +34,7 @@ services:
       - story:/data/db
 
   storyobjectdb:
-        container_name: storyobjectdb
+        # container_name: storyobjectdb
         image: minio/minio:latest
         ports:
             - 9000:9000
@@ -45,7 +48,8 @@ services:
             - storyobjectdata:/data
 
   account-service:
-    build: ./auth
+    image: nahid9658/authservice
+    build: ./backend/auth
     restart: unless-stopped
     ports:
       - 3000:3000
@@ -54,8 +58,9 @@ services:
     environment:
       DB_URL: mongodb://db-account/AccountDatabase
 
-  status-service:
-    build: ./post
+  status-service: 
+    build: ./backend/post
+    image: nahid9658/postservice
     restart: unless-stopped
     ports:
       - 3001:3001
@@ -67,7 +72,8 @@ services:
 
 
   story-service:
-    build: ./story
+    build: ./backend/story
+    image: nahid9658/storyservice
     restart: unless-stopped
     ports:
       - 3002:3002
@@ -78,6 +84,15 @@ services:
     environment:
       DB_URL: mongodb://db-story/StoryDatabases
   
+  # frontend:
+  #   container_name: frontend
+  #   # build: ./frontend/facebook
+  #   image: nahid9658/frontend
+  #   restart: unless-stopped
+  #   ports:
+  #     - 4200:4200
+  #   depends_on:
+  #     - nginx
   
 volumes:
   status:
