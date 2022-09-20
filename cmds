@@ -1,0 +1,35 @@
+
+
+//nginx
+cd etc 
+cd nginx
+cat nginx.conf
+cd sites-available
+
+cat nginx.conf
+cat default
+touch app
+nano app
+sudo ln ../sites-enabled/app
+sudo service nginx restart
+
+
+
+// Docker
+
+minifacebook/public$ ng build
+
+minifacebook/api/user$ docker build -t nahid9658/userservice .
+
+minifacebook/api/status$ docker build -t nahid9658/statusservice .
+
+minifacebook/api/story$ docker build -t nahid9658/storyservice .
+
+minifacebook$ docker build -t nahid9658/minifacebookstack .
+
+minifacebook$ docker swarm init
+
+minifacebook$ docker stack deploy --compose-file docker-compose.yml minifacebook
+
+minifacebook$ docker service update minifacebook_nginx --publish-add 80:80
+
